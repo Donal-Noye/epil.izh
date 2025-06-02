@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
-const servicesLength = 9;
+const servicesLength = 5;
 
 const services = [
   { title: "Лазерная эпиляция ног", price: "2 000 ₽" },
