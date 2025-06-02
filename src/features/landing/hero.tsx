@@ -10,11 +10,10 @@ export function Hero() {
           alt="Hero"
           fill
           className="object-cover"
-
         />
       </div>
       <div className="absolute bottom-10 w-full flex justify-center items-center flex-col">
-        <h1 className="scroll-m-20 mb-10 text-center text-[14vw] font-extrabold -tracking-wider leading-[.8] text-balance text-white">
+        <h1 className="scroll-m-20 mb-10 text-center text-[19vw] sm:text-[14vw] font-extrabold -tracking-wider leading-[.8] text-balance text-white">
           Лазерная эпиляция
         </h1>
         <Button size="lg" className="h-10 px-6 text-lg">Записаться</Button>
