@@ -29,8 +29,8 @@ export function Header() {
   }, []);
 
   return (
-    <header className="fixed left-0 z-10 w-full flex justify-center p-4 sm:px-8 pointer-events-none">
-      <div className="w-full max-w-screen-xl flex items-center justify-between rounded-3xl p-4 sm:px-6 sm:py-3 backdrop-blur-sm sm:backdrop-blur-none">
+    <header className="fixed left-0 z-10 w-full flex justify-center p-4 pointer-events-none">
+      <div className="w-full flex items-center justify-between rounded-3xl p-4 sm:px-6 sm:py-3 backdrop-blur-sm sm:backdrop-blur-none">
         <div className="flex items-center gap-4">
           <Image
             className="w-13 h-13 sm:w-[70px] sm:h-[70px]"
@@ -38,7 +38,6 @@ export function Header() {
             height={70}
             src="/images/logo.png"
             alt=""
-            unoptimized
           />
           <p
             className={cn(
