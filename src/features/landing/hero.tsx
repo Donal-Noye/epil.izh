@@ -25,7 +25,7 @@ export function Hero() {
           src="/images/hero.jpg"
           alt="Hero"
           priority
-          className="object-cover [transform:translateZ(0)] [backface-visibility:hidden]"
+          className="w-full h-full object-cover will-change-transform"
           sizes="100vw"
           fill={false}
           width={1920}
@@ -35,7 +35,7 @@ export function Hero() {
 
       <motion.div
         style={{ y }}
-        className="absolute bottom-10 w-full flex justify-center items-center flex-col"
+        className="absolute bottom-20 sm:bottom-10 w-full flex justify-center items-center flex-col"
       >
         <h1 className="scroll-m-20 mb-10 text-center text-[20vw] sm:text-[14vw] font-extrabold -tracking-wider leading-[.8] text-balance text-white">
           Лазерная эпиляция
