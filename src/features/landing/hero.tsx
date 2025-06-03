@@ -24,8 +24,12 @@ export function Hero() {
         <Image
           src="/images/hero.jpg"
           alt="Hero"
-          fill
-          className="object-cover will-change-transform"
+          priority
+          className="w-full h-full object-cover will-change-transform"
+          sizes="100vw"
+          fill={false}
+          width={1920}
+          height={1080}
         />
       </div>
 

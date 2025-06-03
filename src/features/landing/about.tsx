@@ -36,8 +36,7 @@ export function About() {
               transformOrigin: "left",
             }}
           />
-        </span>
-        . Наши мастера имеют медицинское образование.
+        </span>. Наши мастера имеют медицинское образование.
       </motion.p>
     </section>
   );

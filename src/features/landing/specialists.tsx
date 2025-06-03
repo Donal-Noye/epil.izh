@@ -45,7 +45,7 @@ export function Specialists() {
             transition={{
               duration: 0.6,
               ease: 'easeOut',
-              delay: index * 0.2,
+              delay: index * 0.05,
             }}
             viewport={{ once: true, amount: 0.3 }}
           >

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="container px-6 py-10">
+    <footer className="container px-6 pt-10 pb-5 sm:py-10">
       <div className="flex flex-col sm:flex-row sm:justify-between gap-6 sm:gap-10">
         <div className="flex flex-col lg:flex-row items-start gap-3 sm:gap-6">
           <iframe
@@ -35,7 +35,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1 sm:gap-3">
           <p className="text-xl text-muted-foreground">Связаться с нами:</p>
           <div className="flex gap-3">
             <Button
