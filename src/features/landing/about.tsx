@@ -25,18 +25,18 @@ export function About() {
       >
         Электроэпиляция — удаление волос{" "}
         <span className="relative inline-block">
-          НАВСЕГДА
+          НАВСЕГДА.
           <motion.span
             className="absolute inset-0 bg-primary/30 z-[-1]"
             initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
+            whileInView={{ scaleX: .95 }}
             transition={{ delay: .8, duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
             style={{
               transformOrigin: "left",
             }}
           />
-        </span>. Наши мастера имеют медицинское образование.
+        </span> Наши мастера имеют медицинское образование.
       </motion.p>
     </section>
   );

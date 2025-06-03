@@ -25,7 +25,7 @@ export function Hero() {
           src="/images/hero.jpg"
           alt="Hero"
           priority
-          className="w-full h-full object-cover will-change-transform"
+          className="object-cover [transform:translateZ(0)] [backface-visibility:hidden]"
           sizes="100vw"
           fill={false}
           width={1920}
