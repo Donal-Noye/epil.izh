@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/shared/ui/card";
 import { useMemo, useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
@@ -36,13 +36,13 @@ export function Services() {
   const showMore = () => setVisible((prev) => prev + servicesLength);
 
   return (
-    <section className="container bg-[#977a6c]/30 py-10">
+    <section className="container bg-[#977a6c]/20 py-10">
       <div className="max-w-4xl mx-auto">
         <h2 className="scroll-m-20 text-5xl font-semibold tracking-tight first:mt-0 text-center">
           Услуги
         </h2>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-8 flex justify-center">
           <Input
             placeholder="Поиск услуги..."
             value={query}
@@ -58,10 +58,10 @@ export function Services() {
           {filtered.slice(0, visible).map((service, i) => (
             <Card
               key={i}
-              className="grid grid-rows-[1fr_auto_1fr] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white gap-0 sm:gap-2"
+              className="grid grid-rows-[1fr_auto_1fr] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white gap-2"
             >
               <CardHeader className="pb-0">
-                <p className="text-sm sm:text-base font-medium">{service.title}</p>
+                <CardTitle className="font-medium">{service.title}</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground text-base">
                 {service.price}

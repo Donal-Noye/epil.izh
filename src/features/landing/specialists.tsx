@@ -1,30 +1,34 @@
+'use client';
+
 import {
   Card,
   CardContent,
-  CardFooter,
+  CardDescription,
   CardHeader,
-} from "@/shared/ui/card";
-import Image from "next/image";
-import { Button } from "@/shared/ui/button";
+  CardTitle,
+} from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
+import { motion } from 'framer-motion';
 
 const items = [
   {
-    name: "Дерендеева Лейсан",
-    role: "Специалист по лазерной эпиляции/электролог"
+    name: 'Дерендеева Лейсан',
+    role: 'Специалист по лазерной эпиляции/электролог',
   },
   {
-    name: "Юлия Шадманова",
-    role: "Мастер Лазерной Эпиляции"
+    name: 'Юлия Шадманова',
+    role: 'Мастер Лазерной Эпиляции',
   },
   {
-    name: "Сакерина Софья",
-    role: "Мастер Лазерной Эпиляции"
+    name: 'Сакерина Софья',
+    role: 'Мастер Лазерной Эпиляции',
   },
   {
-    name: "Петрова Диана",
-    role: "Мастер Лазерной Эпиляции"
+    name: 'Петрова Диана',
+    role: 'Мастер Лазерной Эпиляции',
   },
-]
+];
 
 export function Specialists() {
   return (
@@ -32,32 +36,35 @@ export function Specialists() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Специалисты
       </h2>
-      <div className="mt-6 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="mt-6 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {items.map((item, index) => (
-          <Card
+          <motion.div
             key={index}
-            className="flex flex-col justify-between rounded-2xl overflow-hidden shadow-md transition hover:shadow-xl bg-white pt-0 gap-3"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: 'easeOut',
+              delay: index * 0.2,
+            }}
+            viewport={{ once: true, amount: 0.3 }}
           >
-            <CardHeader className="p-0 overflow-hidden">
-              <Image
-                src="https://placehold.co/600x400"
-                alt={item.name}
-                width={600}
-                height={400}
-                className="w-full h-28 sm:h-[240px] object-cover"
-                unoptimized
-              />
-            </CardHeader>
-
-            <CardContent className="flex-1">
-              <p className="text-lg font-semibold mb-1">{item.name}</p>
-              <p className="text-sm text-muted-foreground">{item.role}</p>
-            </CardContent>
-
-            <CardFooter className="pt-0 mt-auto">
-              <Button className="w-full">Записаться</Button>
-            </CardFooter>
-          </Card>
+            <Card className="w-full max-w-md mx-auto sm:max-w-full gap-2 sm:gap-6">
+              <CardHeader className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+                <Avatar className="w-20 h-20">
+                  <AvatarImage src="https://placehold.co/340x340" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-1">
+                  <CardTitle>{item.name}</CardTitle>
+                  <CardDescription>{item.role}</CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent className="mt-auto">
+                <Button className="w-full">Записаться</Button>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { MapPinned, Phone } from "lucide-react";
 import { Button } from "@/shared/ui/button";
@@ -53,8 +53,8 @@ export function Header() {
           <div className="flex flex-col items-end">
             <a
               className={cn(
-                "text-sm md:text-base lg:text-lg text-neutral-200 hover:underline hidden sm:flex items-center gap-2",
-                scrolled && "text-black"
+                "text-sm md:text-base lg:text-lg text-neutral-100 hover:underline hidden sm:flex items-center gap-2",
+                scrolled && "text-black",
               )}
               target="_blank"
               href="https://2gis.ru/izhevsk/firm/70000001060681476"
@@ -65,36 +65,32 @@ export function Header() {
             <a
               href="tel:+79991894025"
               className={cn(
-                "text-sm md:text-base lg:text-lg text-neutral-200 hover:underline hidden sm:flex items-center gap-2",
-                scrolled && "text-black"
+                "text-sm md:text-base lg:text-lg text-neutral-100 hover:underline hidden sm:flex items-center gap-2",
+                scrolled && "text-black",
               )}
             >
               <Phone width={18} height={18} />
               +7 (999) 189-40-25
             </a>
           </div>
-          <div className="flex items-center gap-2 sm:hidden">
-            <Button variant="outline" asChild size="icon">
-              <a
-                className="text-sm md:text-base lg:text-lg hover:underline hidden sm:flex items-center gap-2"
-                target="_blank"
-                href="https://2gis.ru/izhevsk/firm/70000001060681476"
-              >
-                <MapPinned width={18} height={18} />
-              </a>
+          <div className="flex justify-between w-full md:w-auto md:block space-x-2">
+            <Button
+              variant="secondary"
+              className="text-base"
+              size="lg"
+              onClick={() => {
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              Контакты
             </Button>
-            <Button variant="outline" asChild size="icon">
-              <a
-                href="tel:+79991894025"
-                className="text-sm md:text-base lg:text-lg hover:underline hidden sm:flex items-center gap-2"
-              >
-                <Phone width={18} height={18} />
-              </a>
+            <Button variant="secondary" className="text-base" size="lg">
+              Войти
             </Button>
           </div>
-          <Button variant="secondary" className="text-base" size="lg">
-            Войти
-          </Button>
         </div>
       </div>
     </header>
