@@ -28,11 +28,11 @@ const items = [
 
 export function Specialists() {
   return (
-    <section className="min-h-screen container pt-20 pb-10">
+    <section className="container pb-6 md:pb-28">
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Специалисты
       </h2>
-      <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="mt-6 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {items.map((item, index) => (
           <Card
             key={index}
@@ -44,7 +44,7 @@ export function Specialists() {
                 alt={item.name}
                 width={600}
                 height={400}
-                className="w-full h-[240px] object-cover"
+                className="w-full h-28 sm:h-[240px] object-cover"
                 unoptimized
               />
             </CardHeader>

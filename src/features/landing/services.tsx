@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
-const servicesLength = 5;
+const servicesLength = 8;
 
 const services = [
   { title: "Лазерная эпиляция ног", price: "2 000 ₽" },
@@ -37,62 +37,64 @@ export function Services() {
 
   return (
     <section className="container bg-[#977a6c]/30 py-10">
-      <h2 className="scroll-m-20 text-5xl font-semibold tracking-tight first:mt-0 text-center">
-        Услуги
-      </h2>
+      <div className="max-w-4xl mx-auto">
+        <h2 className="scroll-m-20 text-5xl font-semibold tracking-tight first:mt-0 text-center">
+          Услуги
+        </h2>
 
-      <div className="mt-6 flex justify-center">
-        <Input
-          placeholder="Поиск услуги..."
-          value={query}
-          onChange={(e) => {
-            setQuery(e.currentTarget.value);
-            setVisible(servicesLength);
-          }}
-          className="max-w-md w-full bg-white h-12"
-        />
-      </div>
-
-      <div className="mt-6 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {filtered.slice(0, visible).map((service, i) => (
-          <Card
-            key={i}
-            className="flex flex-col justify-between rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
-          >
-            <CardHeader className="pb-0">
-              <p className="text-lg font-medium">{service.title}</p>
-            </CardHeader>
-            <CardContent className="pt-2 text-muted-foreground text-base">
-              {service.price}
-            </CardContent>
-            <CardFooter className="p-4 pt-0 mt-auto">
-              <Button className="w-full" variant="outline">
-                Подробнее
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-
-      {filtered.length > servicesLength && (
-        <div className="flex justify-center mt-8">
-          {visible < filtered.length ? (
-            <Button onClick={showMore} size="lg" variant="secondary">
-              Показать ещё
-            </Button>
-          ) : (
-            <Button onClick={() => setVisible(servicesLength)} size="lg" variant="secondary">
-              Скрыть
-            </Button>
-          )}
+        <div className="mt-6 flex justify-center">
+          <Input
+            placeholder="Поиск услуги..."
+            value={query}
+            onChange={(e) => {
+              setQuery(e.currentTarget.value);
+              setVisible(servicesLength);
+            }}
+            className="max-w-md w-full bg-white h-12"
+          />
         </div>
-      )}
 
-      {filtered.length === 0 && (
-        <p className="h-[300px] mt-8 text-center text-muted-foreground">
-          По запросу «{query}» ничего не найдено.
-        </p>
-      )}
+        <div className="mt-6 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+          {filtered.slice(0, visible).map((service, i) => (
+            <Card
+              key={i}
+              className="grid grid-rows-[1fr_auto_1fr] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white gap-0 sm:gap-2"
+            >
+              <CardHeader className="pb-0">
+                <p className="text-sm sm:text-base font-medium">{service.title}</p>
+              </CardHeader>
+              <CardContent className="text-muted-foreground text-base">
+                {service.price}
+              </CardContent>
+              <CardFooter className="pt-0 mt-auto">
+                <Button className="w-full" variant="outline">
+                  Подробнее
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        {filtered.length > servicesLength && (
+          <div className="flex justify-center mt-8">
+            {visible < filtered.length ? (
+              <Button onClick={showMore} size="lg" variant="secondary">
+                Показать ещё
+              </Button>
+            ) : (
+              <Button onClick={() => setVisible(servicesLength)} size="lg" variant="secondary">
+                Скрыть
+              </Button>
+            )}
+          </div>
+        )}
+
+        {filtered.length === 0 && (
+          <p className="h-[300px] mt-8 text-center text-muted-foreground">
+            По запросу «{query}» ничего не найдено.
+          </p>
+        )}
+      </div>
     </section>
   );
 }
