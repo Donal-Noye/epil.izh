@@ -27,4 +27,4 @@ jobs:
           user: ${{ secrets.SSH_USERNAME }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          command: source ~/.nvm/nvm.sh; echo "Hello world1"
+          command: source ~/.nvm/nvm.sh; echo "Hello world2"
