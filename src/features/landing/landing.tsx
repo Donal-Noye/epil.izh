@@ -7,13 +7,13 @@ import { Footer } from "@/features/landing/footer";
 
 export function LandingPage() {
 	return (
-		<div>
+		<>
       <Header />
       <Hero />
       <About />
       <Specialists />
       <Services />
       <Footer />
-		</div>
+		</>
 	)
 }
