@@ -19,11 +19,12 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - name: Execute SSH script
-        uses: appleboy/ssh-action@v1.0.0
+      - name: SSH Command
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
           # hostname / IP of the server
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: source ~/.nvm/nvm.sh; echo "Hello world2"
+          user: ${{ secrets.SSH_USERNAME }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          command: source ~/.nvm/nvm.sh; echo "Hello world"
