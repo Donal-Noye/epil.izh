@@ -5,6 +5,7 @@ import { Button } from "@/shared/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/ui/utils";
+import { Profile } from "@/services/user/user";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -73,7 +74,7 @@ export function Header() {
               +7 (999) 189-40-25
             </a>
           </div>
-          <div className="flex justify-between w-full md:w-auto md:block space-x-2">
+          <div className="flex items-center justify-between w-full md:w-auto space-x-2 gap-2">
             <Button
               variant="secondary"
               className="text-base"
@@ -87,9 +88,7 @@ export function Header() {
             >
               Контакты
             </Button>
-            <Button variant="secondary" className="text-base" size="lg">
-              Войти
-            </Button>
+            <Profile />
           </div>
         </div>
       </div>
