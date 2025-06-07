@@ -45,10 +45,11 @@ export function Profile() {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
+          className="text-sm sm:text-base"
 					variant="secondary"
 					size="lg"
 				>
-					<Avatar className="w-8 h-8">
+					<Avatar className="w-6 h-6 sm:w-8 sm:h-8">
 						<AvatarImage src={user?.image} />
 						<AvatarFallback>AC</AvatarFallback>
 					</Avatar>

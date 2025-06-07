@@ -8,7 +8,7 @@ export function SignInButton() {
     <Button
       onClick={handleSignIn}
       variant="secondary"
-      className="text-base"
+      className="text-sm sm:text-base"
       size="lg"
     >
       Войти
