@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/ui/utils";
 import { Profile } from "@/services/user/user";
+import Link from "next/link";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +33,7 @@ export function Header() {
   return (
     <header className="fixed left-0 z-10 w-full flex justify-center p-4 pointer-events-none">
       <div className="w-full flex items-center justify-between rounded-3xl p-4 sm:px-6 sm:py-3 backdrop-blur-sm sm:backdrop-blur-none">
-        <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-4 pointer-events-auto">
           <Image
             className="w-13 h-13 sm:w-[70px] sm:h-[70px]"
             width={70}
@@ -48,7 +49,7 @@ export function Header() {
           >
             Epil.Izh
           </p>
-        </div>
+        </Link>
 
         <div className="flex sm:flex-col md:flex-row items-center sm:items-end md:items-center gap-2 sm:gap-4 pointer-events-auto sm:backdrop-blur-md rounded-3xl sm:p-4">
           <div className="flex flex-col items-end">
@@ -74,10 +75,10 @@ export function Header() {
               +7 (999) 189-40-25
             </a>
           </div>
-          <div className="flex items-center justify-between w-full md:w-auto space-x-2 gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full md:w-auto space-x-1 sm:space-x-2 gap-2">
             <Button
               variant="secondary"
-              className="text-base"
+              className="text-sm sm:text-base"
               size="lg"
               onClick={() => {
                 window.scrollTo({
