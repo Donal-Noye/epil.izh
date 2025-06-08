@@ -18,7 +18,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative sm:overflow-hidden h-screen bg-[#977a6c]"
+      className="relative sm:overflow-hidden h-svh bg-[#977a6c]"
     >
       <div className="absolute inset-0 w-full sm:h-full">
         <Image
