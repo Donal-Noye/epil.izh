@@ -75,7 +75,7 @@ export function Header() {
               +7 (999) 189-40-25
             </a>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full md:w-auto space-x-1 sm:space-x-2 gap-2">
+          <div className="flex items-center justify-between w-full md:w-auto space-x-1 sm:space-x-2 gap-2">
             <Button
               variant="secondary"
               className="text-sm sm:text-base"
