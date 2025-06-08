@@ -4,6 +4,7 @@ import { SignInForm } from "@/features/auth/sing-in-form.server";
 import Link from "next/link";
 import { Button } from "@/shared/ui/button";
 import { ArrowLeft } from "lucide-react";
+import {Suspense} from "react";
 
 export default function AuthenticationPage() {
   return (
@@ -25,7 +26,9 @@ export default function AuthenticationPage() {
                     Войдите в свою учетную запись Epil.izh
                   </p>
                 </div>
-                <SignInForm />
+                <Suspense>
+                  <SignInForm />
+                </Suspense>
               </div>
               <div className="bg-muted relative hidden md:block">
                 <Image
