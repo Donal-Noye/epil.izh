@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/shared/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Suspense } from "react";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 export default function AuthenticationPage() {
   return (
@@ -26,7 +27,21 @@ export default function AuthenticationPage() {
                     Войдите в свою учетную запись Epil.izh
                   </p>
                 </div>
-                <Suspense>
+                <Suspense
+                  fallback={
+                    <div className="grid gap-6">
+                      <div className="flex flex-col gap-4">
+                        <div className="grid gap-3">
+                          <Skeleton className="h-4 w-20" />
+                          <Skeleton className="h-10 w-full rounded-md" />
+                        </div>
+                        <Skeleton className="h-10 w-full rounded-md" />
+                      </div>
+                      <Skeleton className="h-1 w-full" />
+                      <Skeleton className="h-10 w-full rounded-md" />
+                    </div>
+                  }
+                >
                   <SignInForm />
                 </Suspense>
               </div>
@@ -36,6 +51,7 @@ export default function AuthenticationPage() {
                   src="/images/auth.jpg"
                   alt="Лазерная Эпиляция"
                   className="object-cover"
+                  priority
                 />
               </div>
             </CardContent>
