@@ -37,11 +37,14 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String    @unique
+  role          ROLE      @default(USER)
   emailVerified DateTime?
   image         String?
+  phone         String?
   accounts      Account[]
   sessions      Session[]
+  records       Record[]
 }
 
 model VerificationToken {
@@ -50,4 +53,57 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Specialist {
+  id        String   @id @default(uuid())
+  name      String
+  bio       String?
+  image     String?
+  createdAt DateTime @default(now())
+  records   Record[]
+
+  services Service[] @relation("SpecialistToServices")
+
+  serviceId String?  @unique
+  Service   Service? @relation("PrimaryService", fields: [serviceId], references: [id])
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  durationMin Int
+  records     Record[]
+
+  specialists Specialist[] @relation("SpecialistToServices")
+  primaryFor  Specialist[] @relation("PrimaryService")
+}
+
+model Record {
+  id           String       @id @default(uuid())
+  user         User         @relation(fields: [userId], references: [id])
+  userId       String
+  specialist   Specialist   @relation(fields: [specialistId], references: [id])
+  specialistId String
+  service      Service      @relation(fields: [serviceId], references: [id])
+  serviceId    String
+  date         DateTime
+  status       RecordStatus @default(SCHEDULED)
+  notes        String?
+  createdAt    DateTime     @default(now())
+}
+
+enum ROLE {
+  USER
+  ADMIN
+  SPECIALIST
+}
+
+enum RecordStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
 }
