@@ -36,7 +36,7 @@ export function Services() {
   const showMore = () => setVisible((prev) => prev + servicesLength);
 
   return (
-    <section className="container bg-[#977a6c]/20 py-10">
+    <section className="container bg-muted/40 py-10">
       <div className="max-w-4xl mx-auto">
         <h2 className="scroll-m-20 text-5xl font-semibold tracking-tight first:mt-0 text-center">
           Услуги
@@ -50,7 +50,7 @@ export function Services() {
               setQuery(e.currentTarget.value);
               setVisible(servicesLength);
             }}
-            className="max-w-md w-full bg-white h-12"
+            className="max-w-md w-full h-12"
           />
         </div>
 
@@ -58,7 +58,7 @@ export function Services() {
           {filtered.slice(0, visible).map((service, i) => (
             <Card
               key={i}
-              className="grid grid-rows-[1fr_auto_1fr] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white gap-2"
+              className="grid grid-rows-[1fr_auto_1fr] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-background border"
             >
               <CardHeader className="pb-0">
                 <CardTitle className="font-medium">{service.title}</CardTitle>

@@ -27,7 +27,7 @@ export function About() {
         <span className="relative inline-block">
           НАВСЕГДА.
           <motion.span
-            className="absolute inset-0 bg-primary/30 z-[-1]"
+            className="absolute inset-0 bg-primary/30 dark:bg-primary/50 z-[-1]"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: .95 }}
             transition={{ delay: .8, duration: 0.8, ease: "easeOut" }}
