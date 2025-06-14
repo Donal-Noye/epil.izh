@@ -1,14 +1,17 @@
 "use client";
 
-import { MapPinned, Phone } from "lucide-react";
+import { MapPinned, Notebook, Phone } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/ui/utils";
-import { Profile } from "@/services/user/user";
+import { ProfileMenu } from "@/services/user/profile";
 import Link from "next/link";
+import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
+import { useTheme } from "next-themes";
 
 export function Header() {
+  const { resolvedTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export function Header() {
           <p
             className={cn(
               "hidden sm:block text-2xl sm:text-3xl lg:text-4xl font-extrabold transition-colors duration-300",
-              scrolled ? "text-black" : "text-white",
+              resolvedTheme === "light" && scrolled ? "text-black" : "text-white"
             )}
           >
             Epil.Izh
@@ -56,7 +59,7 @@ export function Header() {
             <a
               className={cn(
                 "text-sm md:text-base lg:text-lg text-neutral-100 hover:underline hidden sm:flex items-center gap-2",
-                scrolled && "text-black",
+                resolvedTheme === "light" && scrolled && "text-black"
               )}
               target="_blank"
               href="https://2gis.ru/izhevsk/firm/70000001060681476"
@@ -68,7 +71,7 @@ export function Header() {
               href="tel:+79991894025"
               className={cn(
                 "text-sm md:text-base lg:text-lg text-neutral-100 hover:underline hidden sm:flex items-center gap-2",
-                scrolled && "text-black",
+                resolvedTheme === "light" && scrolled && "text-black"
               )}
             >
               <Phone width={18} height={18} />
@@ -87,9 +90,17 @@ export function Header() {
                 });
               }}
             >
-              Контакты
+              <Phone className="block md:hidden" width={18} height={18} />
+              <p className="hidden md:block">Контакты</p>
             </Button>
-            <Profile />
+            <ProfileMenu>
+              <DropdownMenuItem asChild>
+                <Link href="/records">
+                  <Notebook className="mr-2 h-4 w-4" />
+                  <span>Мои записи</span>
+                </Link>
+              </DropdownMenuItem>
+            </ProfileMenu>
           </div>
         </div>
       </div>

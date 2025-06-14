@@ -6,9 +6,11 @@ import { getProfileLetters } from "../vm/get-profile-letters";
 export const ProfileAvatar = ({
   profile,
   className,
+  classNameFallback
 }: {
   profile?: Profile;
   className?: string;
+  classNameFallback?: string;
 }) => {
   if (!profile) {
     return null;
@@ -17,7 +19,7 @@ export const ProfileAvatar = ({
   return (
     <Avatar className={cn(className)}>
       <AvatarImage src={profile.image ?? ""} />
-      <AvatarFallback>{getProfileLetters(profile)}</AvatarFallback>
+      <AvatarFallback className={cn(classNameFallback)}>{getProfileLetters(profile)}</AvatarFallback>
     </Avatar>
   );
 };

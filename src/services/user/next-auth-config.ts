@@ -28,7 +28,10 @@ export const nextAuthConfig: AuthOptions = {
           phone: user.phone
         }
       }
-    }
+    },
+    redirect: async () => {
+      return `/records`;
+    },
   },
   pages: {
     signIn: "/auth/sign-in",
