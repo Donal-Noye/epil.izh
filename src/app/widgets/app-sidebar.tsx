@@ -8,11 +8,10 @@ import {
   SidebarMenuItem
 } from "@/shared/ui/sidebar";
 import { Logo } from "@/app/widgets/ui/logo";
-import { Profile } from "@/services/user/user";
 import Link from "next/link";
-import { Notebook, Tag, User } from "lucide-react";
-import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
+import { Notebook, Tag } from "lucide-react";
 import { ToggleTheme } from "@/features/theme/toggle-theme";
+import { ProfileMenu } from "@/services/user/profile";
 
 const navItems = [
   {
@@ -52,15 +51,8 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        <Profile triggerVariant="ghost" className="justify-start py-6">
-          <DropdownMenuItem asChild>
-            <Link href="/profile/me">
-              <User className="mr-2 h-4 w-4" />
-              <span>Профиль</span>
-            </Link>
-          </DropdownMenuItem>
-        </Profile>
+        <ProfileMenu triggerVariant="ghost" className="justify-start py-6" />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

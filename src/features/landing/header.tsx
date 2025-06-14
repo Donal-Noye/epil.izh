@@ -1,11 +1,11 @@
 "use client";
 
-import { MapPinned, Notebook, Phone, User } from "lucide-react";
+import { MapPinned, Notebook, Phone } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/ui/utils";
-import { Profile } from "@/services/user/user";
+import { ProfileMenu } from "@/services/user/profile";
 import Link from "next/link";
 import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
 import { useTheme } from "next-themes";
@@ -93,20 +93,14 @@ export function Header() {
               <Phone className="block md:hidden" width={18} height={18} />
               <p className="hidden md:block">Контакты</p>
             </Button>
-            <Profile>
-              <DropdownMenuItem asChild>
-                <Link href="/profile/me">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Профиль</span>
-                </Link>
-              </DropdownMenuItem>
+            <ProfileMenu>
               <DropdownMenuItem asChild>
                 <Link href="/records">
                   <Notebook className="mr-2 h-4 w-4" />
                   <span>Мои записи</span>
                 </Link>
               </DropdownMenuItem>
-            </Profile>
+            </ProfileMenu>
           </div>
         </div>
       </div>

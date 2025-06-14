@@ -14,10 +14,10 @@ import {
   FormMessage,
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
-import { Spinner } from "@/shared/ui/spinner";
+// import { Spinner } from "@/shared/ui/spinner";
 import { AvatarField } from "./avatar-field";
 import { cn } from "@/shared/ui/utils";
-// import { Profile } from "@/services/profile/domain";
+import { Profile } from "@/services/user/profile";
 // import { useUpdateProfileMutation } from "../queries";
 
 const profileFormSchema = z.object({
@@ -29,7 +29,7 @@ const profileFormSchema = z.object({
     .transform((name) => name.trim())
     .optional(),
   email: z.string().email().optional(),
-  phone: z.number().optional(),
+  phone: z.string().optional(),
   image: z.string().optional(),
 });
 
@@ -44,18 +44,24 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export function ProfileForm({
-  // profile,
-  onSuccess,
+  profile,
+  // onSuccess,
   submitText = "Сохранить",
   className
 }: {
-  // profile: Profile;
-  onSuccess?: () => void;
+  profile: Profile;
+  // onSuccess?: () => void;
   submitText?: string;
   className?: string;
 }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      email: profile.email,
+      image: profile.image ?? undefined,
+      name: profile.name ?? "",
+      phone: profile.phone ?? ""
+    }
   });
 
   return (
@@ -104,14 +110,13 @@ export function ProfileForm({
         <FormField
           control={form.control}
           name="image"
-          disabled
           render={({ field }) => (
             <FormItem>
               <FormLabel>Аватарка</FormLabel>
               <FormControl>
                 <AvatarField
                   value={field.value}
-                  onChange={field.onChange}
+                  // onChange={field.onChange}
                   // profile={profile}
                 />
               </FormControl>
@@ -120,12 +125,12 @@ export function ProfileForm({
           )}
         />
         <Button type="submit" disabled={false}>
-          {false && (
-            <Spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-label="Обновление профиля"
-            />
-          )}
+          {/*{false && (*/}
+          {/*  <Spinner*/}
+          {/*    className="mr-2 h-4 w-4 animate-spin"*/}
+          {/*    aria-label="Обновление профиля"*/}
+          {/*  />*/}
+          {/*)}*/}
           {submitText}
         </Button>
       </form>

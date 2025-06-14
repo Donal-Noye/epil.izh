@@ -1,15 +1,13 @@
 import { Button } from "@/shared/ui/button";
-import { Spinner } from "@/shared/ui/spinner";
+// import { Spinner } from "@/shared/ui/spinner";
 import { ProfileAvatar } from "@/services/user/ui/profile-avatar";
 
 export function AvatarField({
   value,
-  onChange,
-  // profile,
+  // onChange,
 }: {
   value?: string;
-  onChange: (value?: string) => void;
-  // profile: Profile;
+  // onChange: (value?: string) => void;
 }) {
   return (
     <Button
@@ -19,14 +17,14 @@ export function AvatarField({
       onClick={() => {}}
       type="button"
     >
-      {false && (
-        <div className="inset-0 absolute flex items-center justify-center z-10">
-          <Spinner className="w-10 h-10" aria-label="Загрузка новой аватарки" />
-        </div>
-      )}
+      {/*{false && (*/}
+      {/*  <div className="inset-0 absolute flex items-center justify-center z-10">*/}
+      {/*    <Spinner className="w-10 h-10" aria-label="Загрузка новой аватарки" />*/}
+      {/*  </div>*/}
+      {/*)}*/}
       <ProfileAvatar
         className="w-full h-full"
-        // profile={{ ...profile, image: value }}
+        profile={{ email: "leekeiz49@gmal.com", image: value }}
       />
     </Button>
   );
