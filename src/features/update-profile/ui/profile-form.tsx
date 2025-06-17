@@ -127,8 +127,8 @@ export function ProfileForm({
               <FormControl>
                 <AvatarField
                   value={field.value}
-                  // onChange={field.onChange}
-                  // profile={profile}
+                  onChange={field.onChange}
+                  profile={profile}
                 />
               </FormControl>
               <FormMessage />
