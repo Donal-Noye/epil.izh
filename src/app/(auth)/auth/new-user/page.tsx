@@ -4,16 +4,15 @@ import { getAppSessionServer } from "@/kernel/lib/next-auth/server";
 import { redirect } from "next/navigation";
 
 interface PageProps {
-  searchParams: {
-    callbackUrl?: string;
-  };
+  searchParams: Promise<{ callbackUrl: string }>;
 }
 
 export default async function NewUserPage({ searchParams }: PageProps) {
+  const { callbackUrl } = await searchParams;
   const session = await getAppSessionServer();
 
   if (!session) {
-    redirect("/auth/sign-in");
+    return redirect("/auth/sign-in");
   }
 
   return (
@@ -25,10 +24,7 @@ export default async function NewUserPage({ searchParams }: PageProps) {
         </p>
       </div>
       <Separator />
-      <UpdateProfileForm
-        userId={session.user.id}
-        callbackUrl={searchParams.callbackUrl}
-      />
+      <UpdateProfileForm userId={session.user.id} callbackUrl={callbackUrl} />
     </main>
   );
 }
