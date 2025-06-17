@@ -14,11 +14,12 @@ import {
   FormMessage,
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
-// import { Spinner } from "@/shared/ui/spinner";
+import { Spinner } from "@/shared/ui/spinner";
 import { AvatarField } from "./avatar-field";
 import { cn } from "@/shared/ui/utils";
 import { Profile } from "@/services/user/profile";
-// import { useUpdateProfileMutation } from "../queries";
+import { useUpdateProfile } from "../vm/use-update-profile";
+import { UserId } from "@/kernel/domain/user";
 
 const profileFormSchema = z.object({
   name: z
@@ -33,40 +34,50 @@ const profileFormSchema = z.object({
   image: z.string().optional(),
 });
 
-// const getDefaultValues = (profile: Profile) => {
-//   return {
-//     name: profile.name ?? "",
-//     email: profile.email ?? "",
-//     image: profile.image,
-//   };
-// };
+const getDefaultValues = (profile: Profile) => {
+  return {
+    name: profile.name ?? "",
+    email: profile.email,
+    image: profile.image ?? undefined,
+    phone: profile.phone ?? ""
+  };
+};
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export function ProfileForm({
+  userId,
   profile,
-  // onSuccess,
+  onSuccess,
   submitText = "Сохранить",
   className
 }: {
+  userId: UserId
   profile: Profile;
-  // onSuccess?: () => void;
+  onSuccess?: () => void;
   submitText?: string;
   className?: string;
 }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues: {
-      email: profile.email,
-      image: profile.image ?? undefined,
-      name: profile.name ?? "",
-      phone: profile.phone ?? ""
-    }
+    defaultValues: getDefaultValues(profile)
   });
+
+  const updateProfile = useUpdateProfile()
+
+  const handleSubmit = form.handleSubmit(async data => {
+    const newProfile = await updateProfile.update({
+      userId,
+      data,
+    })
+
+    form.reset(getDefaultValues(newProfile.profile))
+    onSuccess?.()
+  })
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(console.log)} className={cn("space-y-8", className)}>
+      <form onSubmit={handleSubmit} className={cn("space-y-8", className)}>
         <FormField
           control={form.control}
           name="email"
@@ -125,12 +136,12 @@ export function ProfileForm({
           )}
         />
         <Button type="submit" disabled={false}>
-          {/*{false && (*/}
-          {/*  <Spinner*/}
-          {/*    className="mr-2 h-4 w-4 animate-spin"*/}
-          {/*    aria-label="Обновление профиля"*/}
-          {/*  />*/}
-          {/*)}*/}
+          {updateProfile.isPending && (
+            <Spinner
+              className="mr-2 h-4 w-4 animate-spin"
+              aria-label="Обновление профиля"
+            />
+          )}
           {submitText}
         </Button>
       </form>

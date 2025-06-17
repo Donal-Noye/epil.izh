@@ -1,0 +1,1 @@
+export { updateProfileUseCase } from "@/services/user/use-case/update-profile";
