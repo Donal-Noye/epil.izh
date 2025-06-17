@@ -3,15 +3,17 @@ import { UpdateProfileForm } from "@/features/update-profile/update-profile-form
 import { getAppSessionServer } from "@/kernel/lib/next-auth/server";
 import { redirect } from "next/navigation";
 
-export default async function NewUserPage({
-  searchParams,
-}: {
-  searchParams: { callbackUrl?: string };
-}) {
+interface PageProps {
+  searchParams: {
+    callbackUrl?: string;
+  };
+}
+
+export default async function NewUserPage({ searchParams }: PageProps) {
   const session = await getAppSessionServer();
 
   if (!session) {
-    return redirect("/auth/sign-in");
+    redirect("/auth/sign-in");
   }
 
   return (
