@@ -35,16 +35,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String    @unique
-  role          ROLE      @default(USER)
+  email         String      @unique
+  role          ROLE        @default(USER)
   emailVerified DateTime?
   image         String?
   phone         String?
   accounts      Account[]
   sessions      Session[]
   records       Record[]
+  specialist    Specialist?
 }
 
 model VerificationToken {
@@ -58,10 +59,14 @@ model VerificationToken {
 model Specialist {
   id        String   @id @default(uuid())
   name      String
+  position  String?
   bio       String?
   image     String?
   createdAt DateTime @default(now())
   records   Record[]
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   services Service[] @relation("SpecialistToServices")
 
@@ -72,7 +77,7 @@ model Specialist {
 model Service {
   id          String   @id @default(uuid())
   name        String
-  description String?
+  description String
   price       Float
   durationMin Int
   records     Record[]

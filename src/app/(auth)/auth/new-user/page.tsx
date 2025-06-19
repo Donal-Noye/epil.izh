@@ -16,7 +16,7 @@ export default async function NewUserPage({ searchParams }: PageProps) {
   }
 
   return (
-    <main className="space-y-6 py-14 container max-w-2xl">
+    <div className="space-y-6 py-14 container max-w-2xl">
       <div>
         <h3 className="text-lg font-medium">Последний шаг</h3>
         <p className="text-sm text-muted-foreground">
@@ -25,6 +25,6 @@ export default async function NewUserPage({ searchParams }: PageProps) {
       </div>
       <Separator />
       <UpdateProfileForm userId={session.user.id} callbackUrl={callbackUrl} />
-    </main>
+    </div>
   );
 }

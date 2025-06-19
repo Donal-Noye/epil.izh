@@ -4,27 +4,15 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-  SidebarMenu, SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenu,
 } from "@/shared/ui/sidebar";
 import { Logo } from "@/app/widgets/ui/logo";
-import Link from "next/link";
-import { Notebook, Tag } from "lucide-react";
 import { ToggleTheme } from "@/features/theme/toggle-theme";
-import { ProfileMenu } from "@/services/user/profile";
+import { ProfileMenu } from "@/entities/user/profile";
+import { MenuItem } from "@/app/widgets/ui/menu-item";
+import { appRoutes } from "@/shared/config/public";
 
-const navItems = [
-  {
-    name: "Записи",
-    icon: <Notebook />,
-    link: "/records"
-  },
-  {
-    name: "Услуги",
-    icon: <Tag />,
-    link: "/services"
-  },
-]
+const navItems = appRoutes.filter((r) => r.showInSidebar);
 
 export function AppSidebar() {
   return (
@@ -37,14 +25,12 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarMenu>
             {navItems.map((item, idx) => (
-              <SidebarMenuItem key={idx}>
-                <SidebarMenuButton asChild>
-                  <Link href={item.link}>
-                    {item.icon}
-                    {item.name}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <MenuItem
+                key={idx}
+                name={item.label}
+                icon={item.icon}
+                link={item.path}
+              />
             ))}
           </SidebarMenu>
         </SidebarGroup>

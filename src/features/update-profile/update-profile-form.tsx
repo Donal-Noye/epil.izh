@@ -3,8 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProfileForm } from "./ui/profile-form";
 import { Spinner } from "@/shared/ui/spinner";
-import { getProfileQuery } from "@/services/user/profile";
+import { getProfileQuery } from "@/entities/user/profile";
 import { useRouter } from "next/navigation";
+import { ProfileFormSkeleton } from "@/features/update-profile/ui/profile-form-skeleton";
 
 export function UpdateProfileForm({
   userId,
@@ -27,7 +28,7 @@ export function UpdateProfileForm({
   };
 
   if (profileQuery.isPending) {
-    return <Spinner aria-label="Загрузка профиля" />;
+    return <ProfileFormSkeleton />;
   }
 
   if (!profileQuery.data) {

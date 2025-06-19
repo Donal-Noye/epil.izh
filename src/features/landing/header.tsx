@@ -5,7 +5,7 @@ import { Button } from "@/shared/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/ui/utils";
-import { ProfileMenu } from "@/services/user/profile";
+import { ProfileMenu } from "@/entities/user/profile";
 import Link from "next/link";
 import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
 import { useTheme } from "next-themes";
