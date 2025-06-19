@@ -2,7 +2,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ProfileForm } from "./ui/profile-form";
-import { Spinner } from "@/shared/ui/spinner";
 import { getProfileQuery } from "@/entities/user/profile";
 import { useRouter } from "next/navigation";
 import { ProfileFormSkeleton } from "@/features/update-profile/ui/profile-form-skeleton";
