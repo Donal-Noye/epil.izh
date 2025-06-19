@@ -1,8 +1,8 @@
 import { Button } from "@/shared/ui/button";
-import { ProfileAvatar } from "@/services/user/ui/profile-avatar";
+import { ProfileAvatar } from "@/entities/user/ui/profile-avatar";
 import { useUploadAvatar } from "@/features/update-profile/vm/use-upload-avatar";
 import { Spinner } from "@/shared/ui/spinner";
-import { Profile } from "@/services/user/profile";
+import { Profile } from "@/entities/user/profile";
 
 export function AvatarField({
   value,

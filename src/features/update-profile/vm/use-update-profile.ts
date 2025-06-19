@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateProfileAction } from "@/features/update-profile/actions/update-profile";
 import { useAppSession } from "@/kernel/lib/next-auth/client";
-import { useInvalidateProfile } from "@/services/user/profile";
+import { useInvalidateProfile } from "@/entities/user/profile";
 
 export const useUpdateProfile = () => {
   const { update: updateSession } = useAppSession();
