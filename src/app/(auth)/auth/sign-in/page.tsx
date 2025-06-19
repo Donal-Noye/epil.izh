@@ -12,7 +12,7 @@ export default function AuthenticationPage() {
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
         <Button variant="link" asChild>
-          <Link className="text-sm text-neutral-500" href="/">
+          <Link className="text-sm dark:text-purple-500" href="/">
             <ArrowLeft />
             Вернуться
           </Link>
