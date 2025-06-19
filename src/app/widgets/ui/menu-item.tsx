@@ -25,7 +25,11 @@ export function MenuItem({
   return (
     <SidebarMenuItem>
       <SidebarMenuButton
-        className={cn(pathname === link && "bg-sidebar-accent text-sidebar-accent-foreground")}
+        className={cn(
+          pathname === link &&
+            "bg-sidebar-accent text-sidebar-accent-foreground",
+          "truncate whitespace-nowrap overflow-hidden",
+        )}
         asChild
       >
         <Link href={link} onClick={() => setOpenMobile(false)}>
