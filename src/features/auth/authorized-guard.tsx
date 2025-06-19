@@ -1,9 +1,9 @@
 "use client";
 
-import { FullPageSpinner } from "@/shared/ui/full-page-spinner";
 import { signIn } from "next-auth/react";
 import { useEffect } from "react";
 import { useAppSession } from "@/kernel/lib/next-auth/client";
+import { FullPageLogoSpinner } from "@/shared/ui/full-page-logo-spinner";
 
 export default function AuthorizedGuard({
   children,
@@ -25,7 +25,7 @@ export default function AuthorizedGuard({
 
   return (
     <>
-      <FullPageSpinner isLoading={isLoading} />
+      <FullPageLogoSpinner isLoading={isLoading} />
       {session.status === "authenticated" && children}
     </>
   );
