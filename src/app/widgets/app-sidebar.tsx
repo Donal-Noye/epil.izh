@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -5,6 +7,7 @@ import {
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
+  useSidebar,
 } from "@/shared/ui/sidebar";
 import { Logo } from "@/app/widgets/ui/logo";
 import { ToggleTheme } from "@/features/theme/toggle-theme";
@@ -15,6 +18,10 @@ import { appRoutes } from "@/shared/config/public";
 const navItems = appRoutes.filter((r) => r.showInSidebar);
 
 export function AppSidebar() {
+  const { setOpenMobile } = useSidebar();
+
+  const handleClick = () => setOpenMobile(false);
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="flex flex-row items-center justify-between">
@@ -30,6 +37,7 @@ export function AppSidebar() {
                 name={item.label}
                 icon={item.icon}
                 link={item.path}
+                action={handleClick}
               />
             ))}
           </SidebarMenu>
@@ -37,7 +45,11 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        <ProfileMenu triggerVariant="ghost" className="justify-start py-6" />
+        <ProfileMenu
+          onClick={handleClick}
+          triggerVariant="ghost"
+          className="justify-start py-6"
+        />
       </SidebarFooter>
     </Sidebar>
   );
