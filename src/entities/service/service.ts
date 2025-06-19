@@ -1,0 +1,1 @@
+export { getServiceListQuery } from "@/entities/service/queries";

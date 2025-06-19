@@ -77,6 +77,34 @@ async function main() {
     skipDuplicates: true,
   });
 
+  await prisma.service.createMany({
+    data: [
+      {
+        id: "service-001",
+        name: "Лазерная эпиляция лица",
+        description: "Эффективное удаление волос с зоны лица",
+        price: 1500,
+        durationMin: 30,
+      },
+      {
+        id: "service-002",
+        name: "Лазерная эпиляция ног",
+        description: "Комплексная обработка ног до бедра",
+        price: 3000,
+        durationMin: 60,
+      },
+      {
+        id: "service-003",
+        name: "Лазерная эпиляция подмышек",
+        description: "Быстрая и безболезненная процедура",
+        price: 1000,
+        durationMin: 15,
+      },
+    ],
+    skipDuplicates: true,
+  });
+
+  console.log("✅ Услуги успешно созданы");
   console.log("✅ Seed выполнен успешно.");
 }
 
