@@ -26,6 +26,7 @@ type ProfileProps = {
   triggerVariant?: "default" | "secondary" | "outline" | "ghost";
   showEmail?: boolean;
   children?: React.ReactNode;
+  onClick?: () => void
 };
 
 export function ProfileMenu({
@@ -35,6 +36,7 @@ export function ProfileMenu({
   triggerVariant = "secondary",
   showEmail = true,
   children,
+  onClick
 }: ProfileProps) {
   const session = useAppSession();
   const { signOut, isPending: isLoadingSignOut } = useSignOut();
@@ -88,7 +90,7 @@ export function ProfileMenu({
 
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href={`/profile/${user?.id}`}>
+            <Link onClick={onClick} href={`/profile/${user?.id}`}>
               <User className="mr-2 h-4 w-4" />
               <span>Профиль</span>
             </Link>

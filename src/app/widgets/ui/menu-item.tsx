@@ -3,7 +3,6 @@
 import {
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/shared/ui/sidebar";
 import { cn } from "@/shared/ui/utils";
 import { LucideIcon } from "lucide-react";
@@ -14,13 +13,14 @@ export function MenuItem({
   link,
   name,
   icon: Icon,
+  action
 }: {
   link: string;
   name: string;
   icon: LucideIcon;
+  action: () => void;
 }) {
   const pathname = usePathname();
-  const { setOpenMobile } = useSidebar();
 
   return (
     <SidebarMenuItem>
@@ -32,7 +32,7 @@ export function MenuItem({
         )}
         asChild
       >
-        <Link href={link} onClick={() => setOpenMobile(false)}>
+        <Link href={link} onClick={action}>
           <Icon />
           {name}
         </Link>
