@@ -15,5 +15,4 @@ export interface RecordEntity {
   date: Date;
   status: RecordStatus;
   notes?: string | null;
-  createdAt: Date;
 }
