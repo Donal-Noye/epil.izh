@@ -11,7 +11,7 @@ const resultSchema = z.object({
 export const getServiceListAction = async () => {
   const serviceList = await getServiceListUseCase.exec();
 
-  return resultSchema.parseAsync({
+  return await resultSchema.parseAsync({
     serviceList,
   });
 };

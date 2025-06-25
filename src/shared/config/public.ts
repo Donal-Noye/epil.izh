@@ -8,29 +8,37 @@ export type AppRoute = {
 	showInSidebar?: boolean;
 };
 
-export const appRoutes: AppRoute[] = [
-	{
-		path: "/records",
-		label: "Мои записи",
-		icon: Notebook,
-		showInSidebar: true,
-	},
-	{
-		path: "/services",
-		label: "Услуги",
-		icon: Tag,
-		showInSidebar: true,
-	},
-	{
-		path: "/specialists",
-		label: "Специалисты",
-		icon: Users,
-		showInSidebar: true,
-	},
-	{
-		path: "/profile",
-		label: "Профиль",
-		icon: User,
-		showInSidebar: false,
-	},
-];
+export const ROUTES = {
+  records: {
+    path: "/records",
+    label: "Мои записи",
+    icon: Notebook,
+    showInSidebar: true,
+  },
+  createRecord: {
+    path: "/records/create",
+    label: "Создание записи",
+    icon: Notebook,
+    showInSidebar: false,
+  },
+  services: {
+    path: "/services",
+    label: "Услуги",
+    icon: Tag,
+    showInSidebar: true,
+  },
+  specialists: {
+    path: "/specialists",
+    label: "Специалисты",
+    icon: Users,
+    showInSidebar: true,
+  },
+  profile: {
+    path: "/profile",
+    label: "Профиль",
+    icon: User,
+    showInSidebar: false,
+  },
+} satisfies Record<string, AppRoute>;
+
+
