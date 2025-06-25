@@ -13,9 +13,9 @@ import { Logo } from "@/app/widgets/ui/logo";
 import { ToggleTheme } from "@/features/theme/toggle-theme";
 import { ProfileMenu } from "@/entities/user/profile";
 import { MenuItem } from "@/app/widgets/ui/menu-item";
-import { appRoutes } from "@/shared/config/public";
+import { AppRoute, ROUTES } from "@/shared/config/public";
 
-const navItems = appRoutes.filter((r) => r.showInSidebar);
+const navItems: AppRoute[] = Object.values(ROUTES).filter((r) => r.showInSidebar);
 
 export function AppSidebar() {
   const { setOpenMobile } = useSidebar();

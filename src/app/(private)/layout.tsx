@@ -1,21 +1,23 @@
-"use client"
+"use client";
 
 import AuthorizedGuard from "@/features/auth/authorized-guard";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/shared/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/shared/ui/sidebar";
 import { AppSidebar } from "@/app/widgets/app-sidebar";
 import { Separator } from "@/shared/ui/separator";
 import { usePathname } from "next/navigation";
-import { appRoutes } from "@/shared/config/public";
+import { ROUTES } from "@/shared/config/public";
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   function getPageTitle(pathname: string): string {
-    const route = appRoutes.find(r => pathname.startsWith(r.path));
+    const route = Object.values(ROUTES)
+      .filter((r) => pathname.startsWith(r.path))
+      .sort((a, b) => b.path.length - a.path.length)[0];
     return route?.label ?? "";
   }
 
