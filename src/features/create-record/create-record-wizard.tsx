@@ -53,7 +53,7 @@ export function CreateRecordWizard() {
   if (isPending) return <FullPageSpinner isLoading />;
 
   return (
-    <div className="min-h-[calc(100*var(--vh)-64px)] flex flex-col -m-4">
+    <div className="min-h-[calc(100*var(--vh)-100px)] flex flex-col -m-4">
       <div className="flex-1 p-4">
         {step === 1 && (
           <ChooseServiceStep
