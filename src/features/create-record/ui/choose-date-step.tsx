@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Calendar } from "@/shared/ui/calendar";
-import { isBefore, startOfDay } from "date-fns";
+import { format, isBefore, startOfDay } from "date-fns";
 import { Card, CardContent } from "@/shared/ui/card";
 import {
   Drawer,
@@ -13,6 +13,7 @@ import {
   DrawerTitle,
 } from "@/shared/ui/drawer";
 import { Button } from "@/shared/ui/button";
+import { Badge } from "@/shared/ui/badge";
 
 function generateTimeSlots(start = 9, end = 18, step = 30): string[] {
   const times: string[] = [];
@@ -41,24 +42,30 @@ export function ChooseDateStep({
 
   useEffect(() => {
     setDate(selectedDate);
+    if (selectedDate) {
+      const h = selectedDate.getHours().toString().padStart(2, "0");
+      const m = selectedDate.getMinutes().toString().padStart(2, "0");
+      setSelectedTime(`${h}:${m}`);
+    } else {
+      setSelectedTime("");
+    }
   }, [selectedDate]);
 
   const handleDayClick = (day: Date) => {
     const isSameDay =
       date && startOfDay(date).getTime() === startOfDay(day).getTime();
 
-    setDate(day);
-
     if (!isSameDay) {
+      setDate(day);
       setSelectedTime("");
     }
 
     setDrawerOpen(true);
   };
 
-  const handleTimeSelect = (time: string) => {
-    if (!date) return;
-    const [h, m] = time.split(":").map(Number);
+  const handleConfirm = () => {
+    if (!date || !selectedTime) return;
+    const [h, m] = selectedTime.split(":").map(Number);
     const newDate = new Date(date);
     newDate.setHours(h, m, 0, 0);
     action(newDate);
@@ -66,11 +73,11 @@ export function ChooseDateStep({
   };
 
   return (
-    <div className="flex flex-col items-center h-full overflow-y-auto">
-      <h1 className="text-base md:text-xl font-medium text-left md:text-center mb-4 md:mb-6 tracking-tight text-muted-foreground">
+    <div className="flex flex-col h-full space-y-4">
+      <h1 className="text-xl md:text-lg font-medium text-left md:text-center md:mb-6 tracking-tight text-balance text-muted-foreground">
         Выберите дату
       </h1>
-      <Card className="w-fit py-4">
+      <Card className="w-fit self-center py-4">
         <CardContent className="px-4">
           <Calendar
             mode="single"
@@ -82,8 +89,17 @@ export function ChooseDateStep({
         </CardContent>
       </Card>
 
+      {selectedDate && (
+        <div className="text-center text-muted-foreground text-lg">
+          Вы выбрали:
+          <Badge variant="secondary" className="ml-2 text-lg">
+            {format(selectedDate, "HH:mm dd.MM.yy")}
+          </Badge>
+        </div>
+      )}
+
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <DrawerContent className="h-[80vh] overflow-y-auto">
+        <DrawerContent className="h-[80vh]">
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader>
               <DrawerTitle>Выберите время</DrawerTitle>
@@ -94,10 +110,7 @@ export function ChooseDateStep({
                 <Button
                   key={time}
                   variant={selectedTime === time ? "default" : "outline"}
-                  onClick={() => {
-                    setSelectedTime(time);
-                    handleTimeSelect(time);
-                  }}
+                  onClick={() => setSelectedTime(time)}
                 >
                   {time}
                 </Button>
@@ -105,6 +118,9 @@ export function ChooseDateStep({
             </div>
 
             <DrawerFooter>
+              <Button onClick={handleConfirm} disabled={!selectedTime}>
+                Подтвердить
+              </Button>
               <DrawerClose asChild>
                 <Button variant="outline">Отмена</Button>
               </DrawerClose>
