@@ -51,7 +51,7 @@ export function ChooseSpecialistStep({
             "transition-colors border border-border/50 h-full flex flex-col pt-0 overflow-hidden hover:bg-muted cursor-pointer", selectedSpecialistId === specialist.id && "bg-muted")
           }
         >
-          <CardHeader className="p-0 relative h-72 md:h-64 overflow-hidden">
+          <CardHeader className="p-0 relative h-64 overflow-hidden">
             <Image
               fill
               className="object-cover"
@@ -61,10 +61,10 @@ export function ChooseSpecialistStep({
             />
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
-            <CardTitle className="text-5xl lg:text-3xl -tracking-wider">
+            <CardTitle className="text-4xl lg:text-3xl -tracking-wider">
               {specialist.name}
             </CardTitle>
-            <CardDescription className="text-muted-foreground text-xl lg:text-base">
+            <CardDescription className="text-muted-foreground text-base">
               {specialist.bio}
             </CardDescription>
           </CardContent>
@@ -74,7 +74,7 @@ export function ChooseSpecialistStep({
               variant="outline"
               size="lg"
               className={cn(
-                "w-full h-10 lg:h-8 text-base md:text-sm",
+                "w-full",
                 selectedSpecialistId === specialist.id && "ring-2 ring-primary",
               )}
               onClick={() => action(specialist.id)}
