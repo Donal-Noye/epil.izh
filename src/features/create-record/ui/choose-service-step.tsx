@@ -1,6 +1,7 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 import { getServiceListQuery } from "@/entities/service/service";
-import { Spinner } from "@/shared/ui/spinner";
 import {
   Card,
   CardContent,
@@ -9,101 +10,109 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
+import { Layout } from "@/features/create-record/ui/layout";
+import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/ui/utils";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/shared/ui/carousel";
+import { Search } from "lucide-react";
+import { Input } from "@/shared/ui/input";
+import { useMemo, useState } from "react";
+import { useDebounce } from "use-debounce";
+import { ServiceCardSkeleton } from "@/features/create-record/ui/service-card-skeleton";
+
+const skeletonList = (
+  <>
+    <ServiceCardSkeleton />
+    <ServiceCardSkeleton className="hidden md:flex" />
+    <ServiceCardSkeleton className="hidden lg:flex" />
+  </>
+);
 
 export function ChooseServiceStep({
   selectedServiceId,
-  onSelect,
+  action,
 }: {
   selectedServiceId: string | null;
-  onSelect: (serviceId: string) => void;
+  action: (serviceId: string) => void;
 }) {
   const serviceListQuery = useQuery({
     ...getServiceListQuery(),
   });
 
-  if (serviceListQuery.isPending) {
-    return (
-      <div className="flex justify-center py-10">
-        <Spinner />
-      </div>
-    );
-  }
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 300);
 
-  if (!serviceListQuery.data?.serviceList.length) {
-    return (
-      <div className="text-center py-10 text-muted-foreground">
-        Нет доступных услуг
-      </div>
+  const filteredServices = useMemo(() => {
+    if (!serviceListQuery.data?.serviceList) return [];
+    return serviceListQuery.data.serviceList.filter((service) =>
+      service.name.toLowerCase().includes(debouncedSearch.toLowerCase()),
     );
-  }
+  }, [serviceListQuery.data?.serviceList, debouncedSearch]);
+
+  const services = filteredServices ?? [];
 
   return (
-    <div className="flex flex-col h-full">
-      <h1 className="text-base md:text-xl font-medium text-left md:text-center mb-4 md:mb-6 tracking-tight text-balance text-muted-foreground">
-        Выберите услугу
-      </h1>
-      <Carousel className="w-full max-w-screen-lg mx-auto h-auto lg:h-full">
-        <CarouselContent className="h-full">
-          {serviceListQuery.data.serviceList.map((service) => (
-            <CarouselItem
-              key={service.id}
-              className="md:basis-1/2 lg:basis-1/3"
-            >
-              <Card
-                className="transition-shadow hover:shadow-xl border border-border/50 h-full flex flex-col justify-between hover:bg-muted cursor-pointer"
-                onClick={() => onSelect(service.id)}
-              >
-                <CardHeader>
-                  <CardTitle className="text-2xl lg:text-3xl -tracking-wider">
-                    {service.name}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground text-base">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-2">
-                  <div className="text-base lg:text-lg font-medium flex items-center gap-2">
-                    💰 Цена:
-                    <Badge className="text-base">{service.price} ₽</Badge>
-                  </div>
-                  <div className="text-base lg:text-lg font-medium flex items-center gap-2">
-                    ⏱️ Длительность:
-                    <Badge variant="secondary" className="text-base">
-                      {service.durationMin} мин.
-                    </Badge>
-                  </div>
-                </CardContent>
+    <Layout
+      skeletonList={skeletonList}
+      isPending={serviceListQuery.isPending}
+      title="Выберите услугу"
+      items={services}
+      selectedId={selectedServiceId}
+      search={
+        <div className="relative w-full max-w-lg mx-auto">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            placeholder="Поиск услуги..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-10 text-lg"
+          />
+        </div>
+      }
+      renderCard={(service) => (
+        <Card
+          className={cn(
+            "transition-shadow hover:shadow-xl border border-border/50 h-full flex flex-col justify-between hover:bg-muted cursor-pointer",
+            selectedServiceId === service.id && "bg-muted",
+          )}
+          onClick={() => action(service.id)}
+        >
+          <CardHeader className="px-4 md:px-6">
+            <CardTitle className="text-5xl lg:text-3xl -tracking-wider mb-1">
+              {service.name}
+            </CardTitle>
+            <CardDescription className="text-muted-foreground text-xl md:text-lg w-[70%] md:w-auto">
+              {service.description}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-2 px-4 md:px-6">
+            <div className="text-xl lg:text-lg font-medium flex items-center gap-2">
+              💰 Цена:
+              <Badge className="text-xl lg:text-base">{service.price} ₽</Badge>
+            </div>
+            <div className="text-xl lg:text-lg font-medium flex items-center gap-2">
+              ⏱️ Длительность:
+              <Badge variant="secondary" className="text-xl lg:text-base">
+                {service.durationMin} мин.
+              </Badge>
+            </div>
+          </CardContent>
 
-                <CardFooter>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className={cn(
-                      "w-full",
-                      selectedServiceId === service.id && "ring-2 ring-primary",
-                    )}
-                    onClick={() => onSelect(service.id)}
-                  >
-                    Выбрать
-                  </Button>
-                </CardFooter>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="-left-4 z-10 md:-left-12" />
-        <CarouselNext className="-right-4 z-10 md:-right-12" />
-      </Carousel>
-    </div>
+          <CardFooter className="px-4 md:px-6">
+            <Button
+              variant="outline"
+              size="lg"
+              className={cn(
+                "w-full h-10 lg:h-8 text-base md:text-sm",
+                selectedServiceId === service.id && "ring-2 ring-primary",
+              )}
+              onClick={() => action(service.id)}
+            >
+              Выбрать
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+    />
   );
 }

@@ -4,17 +4,34 @@ import { getUserRecordsQuery } from "@/entities/record/record";
 import { useQuery } from "@tanstack/react-query";
 import { useAppSession } from "@/kernel/lib/next-auth/client";
 import { Button } from "@/shared/ui/button";
-import { CalendarX } from "lucide-react";
+import { CalendarClock, CalendarX, Pen } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/public";
+import {
+  Card,
+  CardContent,
+  CardDescription, CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/shared/ui/card";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
+import { getServiceListQuery } from "@/entities/service/queries";
+import { getSpecialistListQuery } from "@/entities/specialist/queries";
 
 export function Records() {
   const session = useAppSession()
   const recordsQuery = useQuery({
     ...getUserRecordsQuery(session.data?.user.id as string)
   })
+  const servicesQuery = useQuery({
+    ...getServiceListQuery(),
+  });
+  const specialistsQuery = useQuery({
+    ...getSpecialistListQuery(),
+  });
 
-  if (recordsQuery.isLoading) {
+  if (recordsQuery.isLoading || servicesQuery.isLoading || specialistsQuery.isLoading) {
     return <div>Loading...</div>
   }
 
@@ -37,11 +54,54 @@ export function Records() {
     )
   }
 
+  const serviceMap = new Map(
+    servicesQuery.data?.serviceList.map((s) => [s.id, s]) ?? []
+  );
+
+  const specialistMap = new Map(
+    specialistsQuery.data?.specialistList.map((s) => [s.id, s]) ?? []
+  );
+
   return (
-    <div>
-      {recordsQuery.data?.userRecords.map((record) => (
-        <div key={record.id}>{record.id}</div>
-      ))}
+    <div className="container py-8 space-y-6">
+      <Button asChild>
+        <Link href={ROUTES.createRecord.path}>
+          <Pen />
+          Создать запись
+        </Link>
+      </Button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {recordsQuery.data?.userRecords.map((record) => {
+          const date = new Date(record.date);
+          const service = serviceMap.get(record.serviceId);
+          const specialist = specialistMap.get(record.specialistId);
+
+          if (!service || !specialist) return null;
+
+          return (
+            <Card key={record.id}>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xl flex items-center gap-2">
+                  <CalendarClock className="w-5 h-5 text-muted-foreground" />
+                  {format(date, "d MMMM yyyy, HH:mm", { locale: ru })}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  {service.name} — {specialist.name}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                {service.description}
+              </CardContent>
+              <CardFooter>
+                <Button variant="secondary" asChild>
+                  <Link href={""}>Посмотреть</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   )
 }
