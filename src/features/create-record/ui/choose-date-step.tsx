@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Calendar } from "@/shared/ui/calendar";
-import { format, isBefore, startOfDay } from "date-fns";
+import { addDays, format, isAfter, isBefore, startOfDay } from "date-fns";
 import { Card, CardContent } from "@/shared/ui/card";
 import {
   Drawer,
@@ -15,7 +15,7 @@ import {
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
 
-function generateTimeSlots(start = 9, end = 18, step = 30): string[] {
+function generateTimeSlots(start = 9, end = 18, step = 60): string[] {
   const times: string[] = [];
   for (let hour = start; hour < end; hour++) {
     for (let minute = 0; minute < 60; minute += step) {
@@ -26,6 +26,8 @@ function generateTimeSlots(start = 9, end = 18, step = 30): string[] {
   }
   return times;
 }
+
+const maxDate = addDays(new Date(), 45);
 
 export function ChooseDateStep({
   selectedDate,
@@ -84,7 +86,9 @@ export function ChooseDateStep({
             selected={date}
             onDayClick={handleDayClick}
             className="bg-transparent p-0 [--cell-size:--spacing(11)] md:[--cell-size:--spacing(12)]"
-            disabled={(d) => isBefore(startOfDay(d), startOfDay(new Date()))}
+            disabled={(date) =>
+              isBefore(startOfDay(date), startOfDay(new Date())) || isAfter(date, maxDate)
+            }
           />
         </CardContent>
       </Card>
@@ -99,8 +103,8 @@ export function ChooseDateStep({
       )}
 
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <DrawerContent className="h-[80vh]">
-          <div className="mx-auto w-full max-w-sm">
+        <DrawerContent className="h-[70vh]">
+          <div className="mx-auto w-full max-w-sm flex flex-col h-full">
             <DrawerHeader>
               <DrawerTitle>Выберите время</DrawerTitle>
             </DrawerHeader>
@@ -108,6 +112,7 @@ export function ChooseDateStep({
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 py-2">
               {timeSlots.map((time) => (
                 <Button
+                  size="sm"
                   key={time}
                   variant={selectedTime === time ? "default" : "outline"}
                   onClick={() => setSelectedTime(time)}
@@ -117,7 +122,7 @@ export function ChooseDateStep({
               ))}
             </div>
 
-            <DrawerFooter>
+            <DrawerFooter className="mt-auto">
               <Button onClick={handleConfirm} disabled={!selectedTime}>
                 Подтвердить
               </Button>
