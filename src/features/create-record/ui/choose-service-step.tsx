@@ -81,18 +81,18 @@ export function ChooseServiceStep({
             <CardTitle className="text-5xl lg:text-3xl -tracking-wider mb-1">
               {service.name}
             </CardTitle>
-            <CardDescription className="text-muted-foreground text-xl md:text-lg w-[70%] md:w-auto">
+            <CardDescription className="text-muted-foreground text-lg w-[70%] md:w-auto">
               {service.description}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-2 px-4 md:px-6">
-            <div className="text-xl lg:text-lg font-medium flex items-center gap-2">
+            <div className="text-lg font-medium flex items-center gap-2">
               💰 Цена:
-              <Badge className="text-xl lg:text-base">{service.price} ₽</Badge>
+              <Badge className="text-base">{service.price} ₽</Badge>
             </div>
-            <div className="text-xl lg:text-lg font-medium flex items-center gap-2">
+            <div className="text-lg font-medium flex items-center gap-2">
               ⏱️ Длительность:
-              <Badge variant="secondary" className="text-xl lg:text-base">
+              <Badge variant="secondary" className="text-base">
                 {service.durationMin} мин.
               </Badge>
             </div>
@@ -103,7 +103,7 @@ export function ChooseServiceStep({
               variant="outline"
               size="lg"
               className={cn(
-                "w-full h-10 lg:h-8 text-base md:text-sm",
+                "w-full",
                 selectedServiceId === service.id && "ring-2 ring-primary",
               )}
               onClick={() => action(service.id)}

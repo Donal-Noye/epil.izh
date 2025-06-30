@@ -74,7 +74,7 @@ export function ChooseDateStep({
 
   return (
     <div className="flex flex-col h-full space-y-4">
-      <h1 className="text-xl md:text-lg font-medium text-left md:text-center md:mb-6 tracking-tight text-balance text-muted-foreground">
+      <h1 className="text-lg font-medium text-left md:text-center md:mb-6 tracking-tight text-balance text-muted-foreground">
         Выберите дату
       </h1>
       <Card className="w-fit self-center py-4">

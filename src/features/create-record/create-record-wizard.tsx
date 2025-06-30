@@ -8,10 +8,10 @@ import { ChooseDateStep } from "@/features/create-record/ui/choose-date-step";
 import { useRouter } from "next/navigation";
 import { FullPageSpinner } from "@/shared/ui/full-page-spinner";
 import { createRecordAction } from "@/entities/record/record";
-import { useViewportHeight } from "@/shared/lib/react";
+// import { useViewportHeight } from "@/shared/lib/react";
 
 export function CreateRecordWizard() {
-  useViewportHeight();
+  // useViewportHeight();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -55,7 +55,7 @@ export function CreateRecordWizard() {
   if (isPending) return <FullPageSpinner isLoading />;
 
   return (
-    <div className="min-h-[calc(var(--vh)_*100-64px)] flex flex-col -m-4">
+    <div className="min-h-[calc(100dvh-64px)] flex flex-col -m-4">
       <div className="flex-1 p-4">
         {step === 1 && (
           <ChooseServiceStep
