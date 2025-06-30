@@ -30,7 +30,7 @@ export function Layout<T extends { id: string }>({
 
   return (
     <div className="flex flex-col h-full space-y-4">
-      <h1 className="text-xl md:text-lg font-medium text-left md:text-center md:mb-6 tracking-tight text-balance text-muted-foreground">
+      <h1 className="text-lg font-medium text-left md:text-center md:mb-6 tracking-tight text-balance text-muted-foreground">
         {title}
       </h1>
 
