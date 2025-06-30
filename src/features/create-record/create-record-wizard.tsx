@@ -8,10 +8,8 @@ import { ChooseDateStep } from "@/features/create-record/ui/choose-date-step";
 import { useRouter } from "next/navigation";
 import { FullPageSpinner } from "@/shared/ui/full-page-spinner";
 import { createRecordAction } from "@/entities/record/record";
-import { useViewportHeight } from "@/shared/lib/react";
 
 export function CreateRecordWizard() {
-  useViewportHeight();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [step, setStep] = useState<1 | 2 | 3>(1);
