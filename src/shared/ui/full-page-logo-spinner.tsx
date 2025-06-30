@@ -4,7 +4,7 @@ import { useAppearanceDelay } from "@/shared/lib/react";
 
 export function FullPageLogoSpinner({ isLoading }: { isLoading: boolean }) {
   const show = useAppearanceDelay(isLoading, {
-    appearenceDelay: 0, // задержка перед появлением
+    appearenceDelay: 200, // задержка перед появлением
     minDisplay: 1000, // минимальное время отображения
   });
 
