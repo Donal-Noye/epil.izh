@@ -4,7 +4,7 @@ import { getUserRecordsQuery } from "@/entities/record/record";
 import { useQuery } from "@tanstack/react-query";
 import { useAppSession } from "@/kernel/lib/next-auth/client";
 import { Button } from "@/shared/ui/button";
-import { CalendarClock, CalendarX, Pen } from "lucide-react";
+import { CalendarClock, CalendarX, Pen, Trash } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/public";
 import {
@@ -63,7 +63,7 @@ export function Records() {
   );
 
   return (
-    <div className="container py-8 space-y-6">
+    <div className="space-y-6">
       <Button asChild>
         <Link href={ROUTES.createRecord.path}>
           <Pen />
@@ -82,7 +82,7 @@ export function Records() {
           return (
             <Card key={record.id}>
               <CardHeader className="pb-2">
-                <CardTitle className="text-xl flex items-center gap-2">
+                <CardTitle className="text-xl flex items-center gap-3">
                   <CalendarClock className="w-5 h-5 text-muted-foreground" />
                   {format(date, "d MMMM yyyy, HH:mm", { locale: ru })}
                 </CardTitle>
@@ -94,8 +94,8 @@ export function Records() {
                 {service.description}
               </CardContent>
               <CardFooter>
-                <Button variant="secondary" asChild>
-                  <Link href={""}>Посмотреть</Link>
+                <Button size="icon" variant="destructive">
+                  <Trash />
                 </Button>
               </CardFooter>
             </Card>

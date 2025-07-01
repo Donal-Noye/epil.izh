@@ -18,6 +18,10 @@ export class RecordRepository {
   async getUserRecords(userId: UserId): Promise<RecordEntity[]> {
     return dbClient.record.findMany({ where: { userId: userId } });
   }
+
+  async getAllRecords(): Promise<RecordEntity[]> {
+    return dbClient.record.findMany();
+  }
 }
 
 export const recordRepository = new RecordRepository();
