@@ -61,7 +61,7 @@ export function ChooseSpecialistStep({
             />
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
-            <CardTitle className="text-4xl lg:text-3xl -tracking-wider">
+            <CardTitle className="text-4xl md:text-3xl -tracking-wider">
               {specialist.name}
             </CardTitle>
             <CardDescription className="text-muted-foreground text-base">

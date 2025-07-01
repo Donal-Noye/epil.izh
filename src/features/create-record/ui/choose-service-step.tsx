@@ -78,7 +78,7 @@ export function ChooseServiceStep({
           onClick={() => action(service.id)}
         >
           <CardHeader className="px-4 md:px-6">
-            <CardTitle className="text-5xl lg:text-3xl -tracking-wider mb-1">
+            <CardTitle className="text-5xl md:text-[32px] -tracking-wider mb-1">
               {service.name}
             </CardTitle>
             <CardDescription className="text-muted-foreground text-lg w-[70%] md:w-auto">
