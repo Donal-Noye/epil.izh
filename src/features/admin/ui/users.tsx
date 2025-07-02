@@ -49,9 +49,14 @@ export function Users() {
   }, [debouncedSearch, usersQuery.data?.users]);
 
   return (
-    <Card className="relative pb-0 border-none ring ring-muted overflow-hidden">
+    <Card className="relative pb-0 border-none ring ring-muted overflow-hidden gap-4">
       <CardHeader>
-        <CardTitle>Все пользователи</CardTitle>
+        <div className="flex w-full items-center justify-between">
+          <CardTitle>Все пользователи</CardTitle>
+          <Button variant="secondary" size="sm">
+            Создать
+          </Button>
+        </div>
       </CardHeader>
       <Separator />
       <CardContent className="relative h-40 overflow-hidden">
