@@ -9,7 +9,7 @@ const propsSchema = z.object({
 });
 
 const resultSchema = z.object({
-  profile: specialistSchema,
+  specialist: specialistSchema,
 });
 
 export const getSpecialistAction = async (
@@ -20,6 +20,6 @@ export const getSpecialistAction = async (
   const specialist = await getSpecialistUseCase.exec({ id });
 
   return resultSchema.parseAsync({
-    specialist: specialist,
+    specialist,
   });
 };
