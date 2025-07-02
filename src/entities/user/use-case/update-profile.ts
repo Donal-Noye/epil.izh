@@ -1,5 +1,5 @@
 import { SharedSession, UserId } from "@/kernel/domain/user";
-import { createProfileAbility } from "@/entities/user/domain/ability";
+import { createProfileAbility } from "@/kernel/domain/ability";
 import { AuthorizationError } from "@/shared/lib/errors";
 import { Profile } from "@/entities/user/domain/types";
 import { profileRepository } from "@/entities/user/repositories/profile";
