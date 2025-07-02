@@ -6,9 +6,11 @@ class SpecialistRepository {
     return dbClient.specialist.create({ data });
   }
 
-  async getSpecialistById(
-    specialistId: string,
-  ): Promise<SpecialistEntity> {
+  async remove(specialistId: string): Promise<SpecialistEntity> {
+    return dbClient.specialist.delete({ where: { id: specialistId } });
+  }
+
+  async getSpecialistById(specialistId: string): Promise<SpecialistEntity> {
     return dbClient.specialist.findFirstOrThrow({
       where: {
         id: specialistId,
@@ -17,7 +19,7 @@ class SpecialistRepository {
   }
 
   async getSpecialistList() {
-    return dbClient.specialist.findMany()
+    return dbClient.specialist.findMany();
   }
 }
 
