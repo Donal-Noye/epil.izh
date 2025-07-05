@@ -2,19 +2,12 @@ import { ROLES, SharedUser } from "@/kernel/domain/user";
 import { userRepository } from "@/entities/user/repositories/user";
 import { createId } from "@/shared/lib/id";
 import { privateConfig } from "@/shared/config/private";
-import {specialistRepository} from "@/entities/specialist/repository/specialist";
-
-type CreateUser = {
-  email: string;
-  name?: string | null;
-  image?: string | null;
-  phone?: string | null;
-  emailVerified?: Date | null;
-};
+import { specialistRepository } from "@/entities/specialist/specialist";
+import { CreateUser } from "@/entities/user/domain/types";
 
 export class CreateUserUseCase {
   async exec(data: CreateUser) {
-    const adminEmails = privateConfig.ADMIN_EMAILS?.split(",") ?? []
+    const adminEmails = privateConfig.ADMIN_EMAILS?.split(",") ?? [];
     const specialistEmails = privateConfig.SPECIALIST_EMAILS?.split(",") ?? [];
 
     let role = ROLES.USER;
