@@ -11,14 +11,14 @@ import { Role } from "@/kernel/domain/user";
 
 export type AppRoute = {
 	path: string;
-	label: string;
-	icon: LucideIcon;
+	label?: string;
+	icon?: LucideIcon;
 	showInSidebar?: boolean;
   roles?: Role[]
 };
 
 export const ROUTES = {
-  admin: {
+  dashboard: {
     path: "/dashboard",
     label: "Дашборд",
     icon: LayoutDashboard,
@@ -30,6 +30,12 @@ export const ROUTES = {
     label: "Админ-панель",
     icon: SettingsIcon,
     showInSidebar: true,
+    roles: ["ADMIN"],
+  },
+  createUser: {
+    path: "/admin/create-user",
+    label: "Создание пользователя",
+    showInSidebar: false,
     roles: ["ADMIN"],
   },
   records: {

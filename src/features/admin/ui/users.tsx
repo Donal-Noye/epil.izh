@@ -27,6 +27,8 @@ import { Pen, Trash } from "lucide-react";
 import { Input } from "@/shared/ui/input";
 import { useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
+import Link from "next/link";
+import { ROUTES } from "@/shared/config/public";
 
 export function Users() {
   const usersQuery = useQuery({
@@ -54,7 +56,9 @@ export function Users() {
         <div className="flex w-full items-center justify-between">
           <CardTitle>Все пользователи</CardTitle>
           <Button variant="secondary" size="sm">
-            Создать
+            <Link href={ROUTES.createUser.path}>
+              Создать
+            </Link>
           </Button>
         </div>
       </CardHeader>
