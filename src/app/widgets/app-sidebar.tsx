@@ -46,8 +46,8 @@ export function AppSidebar() {
             {navItems.map((item, idx) => (
               <MenuItem
                 key={idx}
-                name={item.label}
-                icon={item.icon}
+                name={item.label!}
+                icon={item.icon!}
                 link={item.path}
                 action={handleClick}
               />

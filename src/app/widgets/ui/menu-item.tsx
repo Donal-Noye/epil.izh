@@ -26,8 +26,8 @@ export function MenuItem({
     <SidebarMenuItem>
       <SidebarMenuButton
         className={cn(
-          pathname === link &&
-            "bg-sidebar-accent text-sidebar-accent-foreground",
+          pathname.startsWith(link) &&
+          "bg-sidebar-accent text-sidebar-accent-foreground",
           "truncate whitespace-nowrap overflow-hidden",
         )}
         asChild
