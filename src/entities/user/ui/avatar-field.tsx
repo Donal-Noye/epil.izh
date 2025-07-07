@@ -1,6 +1,6 @@
 import { Button } from "@/shared/ui/button";
 import { ProfileAvatar } from "@/entities/user/ui/profile-avatar";
-import { useUploadAvatar } from "@/features/update-profile/vm/use-upload-avatar";
+import { useUploadAvatar } from "@/entities/user/profile";
 import { Spinner } from "@/shared/ui/spinner";
 import { Profile } from "@/entities/user/profile";
 
@@ -11,7 +11,7 @@ export function AvatarField({
 }: {
   value?: string;
   onChange: (value?: string) => void;
-  profile: Profile;
+  profile?: Profile;
 }) {
   const { handleSelectFile, isPending } = useUploadAvatar({
     onSuccess: onChange,
@@ -32,7 +32,10 @@ export function AvatarField({
       )}
       <ProfileAvatar
         className="w-full h-full"
-        profile={{ email: profile.email, image: value }}
+        profile={{
+	        email: profile?.email ?? "",
+	        image: value ?? ""
+        }}
       />
     </Button>
   );
