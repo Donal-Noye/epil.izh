@@ -7,8 +7,7 @@ export const createUserAbility = (session: SharedSession) => ({
     session.user.role === "SPECIALIST",
   canRemoveUser: (userId: UserId) =>
     session.user.id === userId ||
-    session.user.role === "ADMIN" ||
-    session.user.role === "SPECIALIST",
+    session.user.role === "ADMIN"
 });
 
 export const createProfileAbility = (session: SharedSession) => ({
