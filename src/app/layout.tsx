@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/app/providers/app-provider";
+import { Toaster } from "@/shared/ui/sonner";
 
 const inter = Inter({
   subsets: ["cyrillic"],
@@ -31,6 +32,7 @@ export default function RootLayout({
         <AppProvider>
           {children}
         </AppProvider>
+        <Toaster />
       </body>
     </html>
   );
