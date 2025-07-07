@@ -18,6 +18,7 @@ import { Spinner } from "@/shared/ui/spinner";
 import { ProfileAvatar } from "@/entities/user/ui/profile-avatar";
 import { cn } from "@/shared/ui/utils";
 import Link from "next/link";
+import { ROUTES } from "@/shared/config/public";
 
 type ProfileProps = {
   className?: string;
@@ -90,7 +91,7 @@ export function ProfileMenu({
 
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link onClick={onClick} href={`/profile/${user?.id}`}>
+            <Link onClick={onClick} href={`${ROUTES.profile.path}/${user?.id}`}>
               <User className="mr-2 h-4 w-4" />
               <span>Профиль</span>
             </Link>

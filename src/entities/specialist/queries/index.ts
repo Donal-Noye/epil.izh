@@ -13,8 +13,3 @@ export const getSpecialistListQuery = () => ({
   queryKey: [baseKey, "getSpecialistList"],
   queryFn: getSpecialistListAction,
 });
-
-export const removeSpecialistQuery = (specialistId: string) => ({
-  queryKey: [baseKey, "removeSpecialist", specialistId],
-  queryFn: () => removeSpecialistAction({ specialistId }),
-});

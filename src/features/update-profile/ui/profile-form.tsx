@@ -15,7 +15,7 @@ import {
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Spinner } from "@/shared/ui/spinner";
-import { AvatarField } from "./avatar-field";
+import { AvatarField } from "@/entities/user/profile";
 import { cn } from "@/shared/ui/utils";
 import { Profile } from "@/entities/user/profile";
 import { useUpdateProfile } from "../vm/use-update-profile";
@@ -123,7 +123,7 @@ export function ProfileForm({
           name="image"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Аватарка</FormLabel>
+              <FormLabel>Аватар</FormLabel>
               <FormControl>
                 <AvatarField
                   value={field.value}

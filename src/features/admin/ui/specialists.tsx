@@ -27,7 +27,7 @@ export function Specialists() {
       </CardHeader>
       <Separator />
       <CardContent className="p-0">
-        <ScrollArea className="h-36">
+        <ScrollArea className="h-44">
           <div>
             {specialistListQuery.isPending ? (
               <Spinner />

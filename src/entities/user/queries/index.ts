@@ -23,3 +23,12 @@ export const useInvalidateProfile = () => {
       queryKey: [baseKey, "getProfileById", userId],
     });
 };
+
+export const useInvalidateUsers = () => {
+  const queryClient = useQueryClient();
+
+  return () =>
+    queryClient.invalidateQueries({
+      queryKey: [baseKey, "getAllUsers"],
+    });
+}

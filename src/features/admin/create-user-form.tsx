@@ -19,12 +19,13 @@ import { useCreateUserMutation } from "@/features/admin/vm/use-create-user";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/shared/config/public";
 import { toast } from "sonner";
+import {AvatarField} from "@/entities/user/ui/avatar-field";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Введите корректный email" }),
   name: z.string().min(2, { message: "Имя должно быть не короче 2 символов" }),
   phone: z.string().min(10, { message: "Введите корректный номер" }).optional(),
-  image: z.string().url().optional(),
+  image: z.string().optional(),
 });
 
 export function CreateUserForm({ className }: { className?: string }) {
@@ -35,7 +36,7 @@ export function CreateUserForm({ className }: { className?: string }) {
       email: "",
       name: "",
       phone: "",
-      image: "",
+      image: undefined,
     },
   });
 
@@ -44,8 +45,8 @@ export function CreateUserForm({ className }: { className?: string }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     mutation.mutate(values, {
       onSuccess: (data) => {
-        toast.success(`Пользователь ${data.user.name} создан`);
         router.push(ROUTES.adminPanel.path);
+        toast.success(`Пользователь ${data.user.name} создан`);
       },
       onError: (error) => {
         toast.error(`Ошибка создания пользователя: ${error}`);
@@ -57,7 +58,7 @@ export function CreateUserForm({ className }: { className?: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("space-y-6", className)}
+        className={cn("space-y-8 py-14", className)}
       >
         <FormField
           control={form.control}
@@ -118,12 +119,11 @@ export function CreateUserForm({ className }: { className?: string }) {
           name="image"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Аватар (URL)</FormLabel>
+              <FormLabel>Аватар</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="https://..."
-                  disabled={mutation.isPending}
-                  {...field}
+                <AvatarField
+                  value={field.value}
+                  onChange={field.onChange}
                 />
               </FormControl>
               <FormMessage />

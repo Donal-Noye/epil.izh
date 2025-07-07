@@ -1,0 +1,1 @@
+export { removeSpecialistAction } from "@/entities/specialist/actions/remove-specialist";
