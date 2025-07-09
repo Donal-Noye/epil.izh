@@ -1,6 +1,6 @@
 import {SharedSession, SharedUser, UserId} from "@/kernel/domain/user";
 import { userRepository } from "@/entities/user/repositories/user";
-import { createUserAbility } from "@/entities/user/domain/ability";
+import { createUserAbility } from "@/kernel/domain/ability";
 import { AuthorizationError } from "@/shared/lib/errors";
 
 type GetUser = {

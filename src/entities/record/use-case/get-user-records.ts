@@ -1,5 +1,5 @@
 import { SharedSession, UserId } from "@/kernel/domain/user";
-import { createUserAbility } from "@/entities/user/domain/ability";
+import { createUserAbility } from "@/kernel/domain/ability";
 import { AuthorizationError } from "@/shared/lib/errors";
 import { recordRepository } from "@/entities/record/repositories/record";
 

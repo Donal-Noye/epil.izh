@@ -10,5 +10,5 @@ export const getSpecialistQuery = (id: string) => ({
 
 export const getSpecialistListQuery = () => ({
   queryKey: [baseKey, "getSpecialistList"],
-  queryFn: () => getSpecialistListAction(),
+  queryFn: getSpecialistListAction,
 });
